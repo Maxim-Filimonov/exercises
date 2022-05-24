@@ -1,25 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
-
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const minutes = new Date().getMinutes();
+  console.log(minutes);
+  if (minutes % 2 === 0) {
+    return <h1>Четная минута</h1>;
+  } else {
+    return <h1>Нечетная минута</h1>;
+  }
 }
 
 export default App;
