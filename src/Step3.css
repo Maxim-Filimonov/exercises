@@ -33,3 +33,9 @@ input[type="submit"]:hover {
 .field label {
   padding-right: 1rem;
 }
+.errors {
+  margin-bottom: 1rem;
+}
+.error {
+  color: red;
+}

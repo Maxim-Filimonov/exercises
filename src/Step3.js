@@ -4,7 +4,7 @@ import "./Step3.css";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.courseName = React.createRef();
+    this.state = { courseName: "" };
     this.courseDesc = React.createRef();
     this.courseType = React.createRef();
     this.courseLogo = React.createRef();
@@ -12,21 +12,43 @@ class App extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(
-      this.courseName.current.value,
+      this.state.courseName,
       this.courseDesc.current.value,
       this.courseType.current.value,
-      this.courseLogo.current.files[0].name
+      this.courseLogo.current.files[0]?.name
     );
   }
 
+  handleChange(e) {
+    const name = e.target.id;
+    const value = e.target.value;
+    this.setState({ [name]: value });
+  }
+
   render() {
+    let errors = [];
+    if (this.state.courseName.length > 10) {
+      errors.push("Название курса должно быть не больше 10 символов");
+    }
     return (
       <form onSubmit={(e) => this.handleSubmit(e)}>
         <fieldset>
           <legend>Форма для создания курса</legend>
+          <div className="errors">
+            {errors.map((err, index) => (
+              <span key={index} className="error">
+                {err}
+              </span>
+            ))}
+          </div>
           <div className="field">
             <label htmlFor="courseName">Название курса</label>
-            <input ref={this.courseName} id="courseName" type="text"></input>
+            <input
+              value={this.state.courseName}
+              onChange={(e) => this.handleChange(e)}
+              id="courseName"
+              type="text"
+            ></input>
           </div>
           <div className="field">
             <label htmlFor="courseDescription">Описание курса</label>
